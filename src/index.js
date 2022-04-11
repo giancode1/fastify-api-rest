@@ -1,10 +1,14 @@
 const producRoutes = require("../routes/products.routes");
 require('../utils/mongoose');
+const mySwagger = require('../utils/swagger');
 
 const fastify = require("fastify")({
     logger: true, // Logs to console
     // trustProxy: true, // Trusts X-Forwarded-* headers
 });
+
+fastify.register(require('fastify-swagger'), mySwagger.options);
+
 
 fastify.get("/", async (request, reply) => {
     return { hello: "world" };
